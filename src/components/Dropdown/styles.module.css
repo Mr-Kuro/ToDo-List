@@ -1,0 +1,21 @@
+
+.dropdown_is_closed {
+  display: hidden;
+}
+
+.dropdown_is_open {
+  display: relative;
+}
+
+.dropdown__button {
+  background-color: #f1f1f1;
+  border: none;
+  color: #000;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
