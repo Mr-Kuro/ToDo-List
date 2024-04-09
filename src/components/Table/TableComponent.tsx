@@ -39,8 +39,8 @@ export const TableComponent = ({
   return (
     <>
       <Table className={`order-collapse ${tableBorder} m-4 w-11/12 m-auto`}>
-        <TableCaption className=" text-center	">
-          <h2>{title}</h2>
+        <TableCaption className=" text-center	mt-4 mb-8">
+          <h2 className="text-">{title}</h2>
         </TableCaption>
 
         {isMobile ? (

@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom";
-import {
-  AppStore,
-  useGetLoggedUser,
-  useGetTodosCount,
-} from "@/store";
+import { AppStore, useGetLoggedUser } from "@/store";
 import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
 } from "@radix-ui/react-navigation-menu";
+
 import { Button } from "../ui/button";
 
 export const Header = () => {
   const dispatch = AppStore((state) => state.actions.SIGN_OUT);
   const { id } = useGetLoggedUser();
-  const todoesCount = useGetTodosCount();
 
   const buttonProps = {
     disabled: id === 0,
@@ -26,7 +22,7 @@ export const Header = () => {
 
   return (
     <header className="flex justify-around flex-wrap items-center shadow-sm gap-2 p-4 dark:bg-gray-800 z-10 top-0 left-0">
-      <h1>TodoList</h1>
+      <h1 className="text-xl font-bold">Todo List</h1>
 
       <NavigationMenu>
         <NavigationMenuList>
@@ -40,16 +36,7 @@ export const Header = () => {
             </NavigationMenuLink>
             <NavigationMenuLink>
               <Button {...buttonProps}>
-                <Link to="/todoes">
-                  Todoes{" "}
-                  {!!todoesCount && (
-                    <span>
-                      <small className="text-xs align-top">
-                        {todoesCount}*
-                      </small>
-                    </span>
-                  )}
-                </Link>
+                <Link to="/todoes">Todoes</Link>
               </Button>
             </NavigationMenuLink>
             {id ? (

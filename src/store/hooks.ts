@@ -53,9 +53,17 @@ export const useGetBiggestTodoId = () => {
     : 0;
 };
 
-export const useGetTodosPerUser = () => {
+export const useGetTodosPerUser = (quantity?: number) => {
   const loggedUser = useGetLoggedUser();
   const todoList = AppStore(({store}) => store.todoList);
+
+  // return the last todos of the last of array
+  if (quantity) {
+    return todoList
+      .filter((todo) => todo.userId === loggedUser.id)
+      .slice(-quantity);
+  }
+
   return todoList.filter((todo) => todo.userId === loggedUser.id);
 };
 
