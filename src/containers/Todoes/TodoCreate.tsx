@@ -1,5 +1,5 @@
-import { FormComponent, FormFieldProps } from "@/components/Form";
-import {TodoDTO, TodoPropsT, TodoT } from "@/models";
+import { FormComponent, FormFieldProps, SelectOptionProps } from "@/components/Form";
+import { TodoDTO, TodoPropsT, TodoT } from "@/models";
 import {
   AppStore,
   TIMING_OPT,
@@ -7,19 +7,19 @@ import {
   useGetLoggedUser,
   useVerifyTodo,
 } from "@/store";
-import { convertDate, notifierError, notifierSuccess } from "@/store/ultils";
+import { dateConversor, notifierError, notifierSuccess } from "@/utils";
 
 export const TodoCreate = () => {
   const submitAction = AppStore(({ actions }) => actions.ADD_TODO);
   const { todoExists } = useVerifyTodo();
 
-  const initialState: Record<keyof TodoPropsT, string | number> = {
+  const initialState: Record<keyof TodoPropsT, string | number | SelectOptionProps> = {
     id: useGetBiggestTodoId() + 1,
     userId: useGetLoggedUser().id,
     title: "",
     message: "",
-    status: "pending",
-    timing: 0,
+    status: "Pending",
+    timing: '',
     notifierIn: 0,
   };
 
@@ -49,9 +49,10 @@ export const TodoCreate = () => {
       };
     }
   );
+
   const convertedTiming = (TodoPropsT: TodoPropsT): TodoT => {
     const { timing, notifierIn, ...rest } = TodoPropsT;
-    const newDate = convertDate(
+    const newDate = dateConversor(
       (notifierIn.selected as number) * (timing as number)
     );
 
@@ -70,10 +71,10 @@ export const TodoCreate = () => {
       notifierError(["Todo already exists"]);
       return true;
     }
-    
+
     notifierSuccess("Todo created successfully");
 
-    return {todo: convertedTiming(data)};
+    return { todo: convertedTiming(data) };
   };
 
   const templateTitle = "Create a new Todo Item";

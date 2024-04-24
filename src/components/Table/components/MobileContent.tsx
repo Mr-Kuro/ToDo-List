@@ -24,8 +24,7 @@ export const MobileContent = ({
     <section aria-label="Card Content" className={`flex flex-col w-ful`}>
       {tableRows.map(({ ceil }) => (
         <div className="flex-col w-90 m-2">
-
-          <Dropdown title={<p className="text-base">{ceil[2]}</p>} shortCaption={<p className="">{ceil[1]}</p>}>
+          <Dropdown title={<p className="text-base  ">{ceil[2]}</p>} shortCaption={<p className="">{ceil[1]}</p>}>
             <div>
               <div className="flex flex-wrap justify-around rounded-b-lg text-black bg-gray-100">
                 {/* Dropdown Content Items when click on the card */}

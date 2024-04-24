@@ -5,7 +5,7 @@ import { FormComponent, FormFieldProps } from "@/components/Form";
 import { LoggedUserT, SignInDTO, SignInDTOT, UserT } from "@/models";
 import { AppStore, useVerifyUser } from "@/store";
 import { formTemplateProps as formTemplateProps } from "./constants";
-import { notifierError, notifierSuccess } from "@/store/ultils";
+import { notifierError, notifierSuccess } from "@/utils";
 
 export const SignIn = ({ className }: { className?: string }) => {
   const navigate = useNavigate();

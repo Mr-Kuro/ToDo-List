@@ -1,5 +1,5 @@
 import { useGetTodosCount, useGetTodosPerUser } from "@/store";
-import { useIsMobile } from "@/utils/hooks";
+import { useIsMobile } from "@/utils";
 import { useState } from "react";
 
 export const FloatingIcon = ({ enabled }: { enabled: boolean }) => {
@@ -22,7 +22,6 @@ export const FloatingIcon = ({ enabled }: { enabled: boolean }) => {
       <article
         className={`fixed bottom-3 right-3 shadow-2xl z-50 ${dynamicClasses}`}
       >
-        <div className="relative">
           <button
             className="inset-0 absolute"
             onClick={() => setIsOpened(true)}
@@ -36,7 +35,7 @@ export const FloatingIcon = ({ enabled }: { enabled: boolean }) => {
                   {lastThreeTodos.map((todo) => (
                     <li
                       className={`text-sm text-gray-700 py-1 pl-2 ${
-                        todo.status === "checked" ? "line-through" : ""
+                        todo.status === "Checked" ? "line-through" : ""
                       }`}
                       key={todo.id}
                     >
@@ -52,7 +51,6 @@ export const FloatingIcon = ({ enabled }: { enabled: boolean }) => {
               </p>
             )}
           </div>
-        </div>
       </article>
     )
   );

@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-import { useIsMobile } from "@/utils/hooks";
+import { useIsMobile } from "@/utils";
 import { MobileContent } from "./components/MobileContent";
 
 export type TableHeaderProps = {

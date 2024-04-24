@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { AppStore } from ".";
-import { convertDate } from "./ultils";
+import { dateConversor } from "../utils/auxiliary-functions";
 
 
 export const useGetBiggestUserId = () => {
@@ -94,16 +94,14 @@ export const useNotifyUser = () => {
 
 
   const notifyTodoExpired = useCallback(() => {
-    console.log("notifyTodoExpired");
-
     todoList.forEach((todo) => {
       const {id,status,title} = todo
 
-      const convertedTiming = convertDate(0, todo.timing as string).time;
+      const convertedTiming = dateConversor(0, todo.timing as string).time;
       const timing = convertedTiming
       const distance = timing - now;
 
-      if (distance < 0 && status === "pending") {
+      if (distance < 0 && status === "Pending") {
         dispatch({id});
         alert(`${title} Todo expired`);
       }

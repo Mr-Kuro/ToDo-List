@@ -1,13 +1,39 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppStore, useGetLoggedUser } from "@/store";
 import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
-  NavigationMenuLink,
 } from "@radix-ui/react-navigation-menu";
 
 import { Button } from "../ui/button";
+
+type linkButtonProps = {
+  text: string;
+  linkTo?: string;
+  disabled: boolean;
+  onClick?: () => void;
+};
+
+const LinkButton = ({ text, linkTo, ...props }: linkButtonProps) => {
+  const handleClick = useNavigate();
+
+  return (
+    <Button
+      {...props}
+      onClick={() => {
+        if (linkTo) {
+          handleClick(linkTo);
+        } else {
+          props.onClick && props.onClick();
+        }
+      }}
+      className={`bg-transparent text-black hover:bg-gray-100 p-0 m-0 h-fit w-fit`}
+    >
+      <p className="p-2">{text}</p>
+    </Button>
+  );
+};
 
 export const Header = () => {
   const dispatch = AppStore((state) => state.actions.SIGN_OUT);
@@ -29,28 +55,23 @@ export const Header = () => {
           <NavigationMenuItem
             className={`grid ${gridTC} gap-2 w-fit text-nowrap min-w-[12rem]`}
           >
-            <NavigationMenuLink>
-              <Button {...buttonProps}>
-                <Link to="/todoes/create"> Add Todo </Link>
-              </Button>
-            </NavigationMenuLink>
-            <NavigationMenuLink>
-              <Button {...buttonProps}>
-                <Link to="/todoes">Todoes</Link>
-              </Button>
-            </NavigationMenuLink>
+            <LinkButton
+              {...buttonProps}
+              text="Add Todo"
+              linkTo="/todoes/create"
+            />
+
+            <LinkButton {...buttonProps} text="Todoes" linkTo="/todoes" />
+
             {id ? (
-              <NavigationMenuLink>
-                <Button
-                  {...buttonProps}
-                  disabled={false}
-                  onClick={() => {
-                    dispatch(undefined);
-                  }}
-                >
-                  Sign Out
-                </Button>
-              </NavigationMenuLink>
+              <LinkButton
+                {...buttonProps}
+                text="Sign Out"
+                disabled={false}
+                onClick={() => {
+                  dispatch(undefined);
+                }}
+              ></LinkButton>
             ) : null}
           </NavigationMenuItem>
         </NavigationMenuList>

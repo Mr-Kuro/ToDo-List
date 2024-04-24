@@ -4,7 +4,7 @@ import { SelectOptionProps } from "@/components/Form";
 export type TodoT = {
   id: number;
   userId: number;
-  status: "checked" | "pending";
+  status: "Checked" | "Pending";
   title: string;
   message: string;
   timing: number | string;
