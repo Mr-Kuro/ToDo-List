@@ -16,7 +16,7 @@ export const GateUser = ({ callback, children }: GateUserProps) => {
   const unLoggedPaths = useMemo(() => new Set(["signin", "signup"]), []);
 
   useEffect(() => {
-    document.title = path ?? "TodoList";
+    document.title = path === "" ? "Todo List" : `Todo List - ${path}`;
 
     if (id === 0) {
       if (unLoggedPaths.has(path as string)) return;

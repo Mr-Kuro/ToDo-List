@@ -1,39 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { AppStore, useGetLoggedUser } from "@/store";
 import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
 } from "@radix-ui/react-navigation-menu";
-
-import { Button } from "../ui/button";
-
-type linkButtonProps = {
-  text: string;
-  linkTo?: string;
-  disabled: boolean;
-  onClick?: () => void;
-};
-
-const LinkButton = ({ text, linkTo, ...props }: linkButtonProps) => {
-  const handleClick = useNavigate();
-
-  return (
-    <Button
-      {...props}
-      onClick={() => {
-        if (linkTo) {
-          handleClick(linkTo);
-        } else {
-          props.onClick && props.onClick();
-        }
-      }}
-      className={`bg-transparent text-black hover:bg-gray-100 p-0 m-0 h-fit w-fit`}
-    >
-      <p className="p-2">{text}</p>
-    </Button>
-  );
-};
+import { LinkButton } from "./components";
 
 export const Header = () => {
   const dispatch = AppStore((state) => state.actions.SIGN_OUT);
@@ -57,21 +28,28 @@ export const Header = () => {
           >
             <LinkButton
               {...buttonProps}
+              testId="add-todo"
               text="Add Todo"
               linkTo="/todoes/create"
             />
 
-            <LinkButton {...buttonProps} text="Todoes" linkTo="/todoes" />
+            <LinkButton
+              testId="todoes"
+              {...buttonProps}
+              text="Todoes"
+              linkTo="/todoes"
+            />
 
             {id ? (
               <LinkButton
                 {...buttonProps}
                 text="Sign Out"
+                testId="signout"
                 disabled={false}
                 onClick={() => {
                   dispatch(undefined);
                 }}
-              ></LinkButton>
+              />
             ) : null}
           </NavigationMenuItem>
         </NavigationMenuList>
